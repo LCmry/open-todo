@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   has_many :lists
   has_many :items, through: :lists
 
-  validates_presence_of :password, :username
+  validates :username, presence: true
+  validates :password, presence: true
 
   def authenticate?(pass)
     password == pass
