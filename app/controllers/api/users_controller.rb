@@ -12,7 +12,7 @@ class Api::UsersController < Api::BaseController
     if @user.save
       render json: @user.as_json(only: [:username, :password])
     else
-      render json: {error: @user.errors.full_messages}, status: 422
+      respond_with @user.errors.full_messages
     end
   end
 
