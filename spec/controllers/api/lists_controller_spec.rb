@@ -1,9 +1,22 @@
 require 'spec_helper'
 
 describe Api::ListsController do 
+
+  before do
+    List.destroy_all
+  end
+
   describe "create" do
     context "with correct user's password" do
-      xit "takes a list name, creates it if it doesn't exist, and returns false if it does"
+      it "takes a list name, creates it if it doesn't exist, and returns false if it does"
+        user = create(:user)
+        params = { 'list' => {'user_id' => 1, 'name' => 'newlist', 'permissions' => 'private'} }
+
+        expect{ post :create, params }
+          .to be_true
+
+        expect{ post :create, params }
+          .to be_false
     end
 
     context "without correct user's password" do
