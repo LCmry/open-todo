@@ -8,15 +8,16 @@ describe Api::ListsController do
 
   describe "create" do
     context "with correct user's password" do
-      it "takes a list name, creates it if it doesn't exist, and returns false if it does"
+      it "takes a list name, creates it if it doesn't exist, and returns false if it does" do
         user = create(:user)
-        params = { 'list' => {'user_id' => 1, 'name' => 'newlist', 'permissions' => 'private'} }
+        params = { 'list' => {'user_id' => user.id, 'name' => 'newlist', 'permissions' => 'private'} }
 
-        expect{ post :create, params }
-          .to be_true
+        post :create, params
+        response.should be_true
 
-        expect{ post :create, params }
-          .to be_false
+        post :create, params
+        response.should be_false
+      end
     end
 
     context "without correct user's password" do

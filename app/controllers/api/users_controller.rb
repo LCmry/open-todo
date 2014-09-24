@@ -1,7 +1,5 @@
 class Api::UsersController < Api::BaseController
-  before_action :set_response
-  respond_to :json
-
+  
   def index
     @users = User.all
     render json: @users

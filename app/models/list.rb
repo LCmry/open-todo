@@ -2,6 +2,8 @@ class List < ActiveRecord::Base
   belongs_to :user
   has_many :items
 
+  validates_uniqueness_of :name, scope: :user_id
+
   def self.permission_options
     %w(private viewable open)
   end

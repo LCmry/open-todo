@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :user do
-    id 1
     username "myusername"
     password "mypassword"
   end
