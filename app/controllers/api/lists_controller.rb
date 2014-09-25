@@ -1,17 +1,12 @@
 class Api::ListsController < Api::BaseController
 
   def index
-    @user = User.find(params[:user_id])
-    if @user
-      @list = @user.lists
-    else
-      @list = List.find(params[permissions: 'visible'])
-    end
-    render json: @list
+    @lists = List.all
+    render json: @lists.as_json(only: [:name, :permissions])
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find(list_params[:user_id])
     @list = List.new(list_params)
     if @list.save
       render json: @list.as_json(only: [:name, :permissions])
