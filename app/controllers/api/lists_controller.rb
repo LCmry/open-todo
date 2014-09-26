@@ -1,6 +1,7 @@
 class Api::ListsController < Api::BaseController
 
   def index
+    @user = User.find(params[:user_id])
     @lists = List.all
     render json: @lists.as_json(only: [:name, :permissions])
   end
