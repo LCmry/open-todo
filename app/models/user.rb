@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :items, through: :lists
   has_one :api_key, dependent: :destroy
 
-  validates :username, presence: true
+  validates :username, presence: true, uniqueness: true
   validates :password, presence: true
 
   after_create :create_api_key
