@@ -1,5 +1,4 @@
 class Api::BaseController < ActionController::Base
-  before_filter :restrict_access
   before_action :set_response
   respond_to :json
   
@@ -31,4 +30,4 @@ class Api::BaseController < ActionController::Base
     @api_key = ApiKey.find_by_token(params[:token])
   end
 end
-# Above methods and api process helped by https://www.amberbit.com/blog/2014/2/19/building-and-documenting-api-in-rails/
+# Above methods and api process from https://www.amberbit.com/blog/2014/2/19/building-and-documenting-api-in-rails/
