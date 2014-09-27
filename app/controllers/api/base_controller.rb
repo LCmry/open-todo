@@ -1,4 +1,5 @@
 class Api::BaseController < ActionController::Base
+  before_filter :restrict_access
   before_action :set_response
   respond_to :json
   
