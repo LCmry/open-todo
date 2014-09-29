@@ -1,13 +1,16 @@
 class Api::ListsController < Api::BaseController
+  before_filter :restrict_access, except: [:index]
 
   def index
-    @user = User.find(params[:user_id])
-    @lists = List.all
+    if restrict_access_by_header
+      @lists = @api_key.user.lists
+    else
+      @lists = List.all(conditions: ["permissions != ?", 'private'])
+    end
     render json: @lists.as_json(only: [:name, :permissions])
   end
 
   def create
-    @user = User.find(list_params[:user_id])
     @list = List.new(list_params)
     if @list.save
       render json: @list.as_json(only: [:name, :permissions])
