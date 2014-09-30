@@ -6,6 +6,12 @@ class Api::BaseController < ActionController::Base
     request.format = :json
   end
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  
+  def record_not_found
+    render json: {error: "It's not there."}, status: 404
+  end
+
   private
 
   def restrict_access

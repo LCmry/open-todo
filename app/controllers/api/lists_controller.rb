@@ -11,6 +11,15 @@ class Api::ListsController < Api::BaseController
     render json: @lists.as_json(only: [:id, :name, :permissions])
   end
 
+  def show
+    @list = List.find(params[:id])
+    if @current_user.can?(:view, @list)
+      render json: @list.items.as_json(only: :description)
+    else
+      render json: {error: "Cannot view list."}
+    end
+  end
+
   def create
     @list = List.new(list_params)
     if @list.save
@@ -27,6 +36,16 @@ class Api::ListsController < Api::BaseController
       render json: {message: "List was destroyed."}
     else
       render json: {error: "Problem destroying list."}
+    end
+  end
+
+  def update
+    @list = List.find(params[:id])
+    if @current_user.can?(:update, @list)
+      @list.update(list_params)
+      render json: @list.as_json(only: [:id, :name, :permissions])
+    else
+      render json: {error: "Problem updating list."}
     end
   end
 
