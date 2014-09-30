@@ -1,5 +1,6 @@
 class Api::UsersController < Api::BaseController
   before_filter :restrict_access, except: [:create]
+  wrap_parameters format: :json
   
   def index
     @users = User.all
