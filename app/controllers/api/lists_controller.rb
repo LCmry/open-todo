@@ -7,15 +7,25 @@ class Api::ListsController < Api::BaseController
     else
       @lists = List.all(conditions: ["permissions != ?", 'private'])
     end
-    render json: @lists.as_json(only: [:name, :permissions])
+    render json: @lists.as_json(only: [:id, :name, :permissions])
   end
 
   def create
     @list = List.new(list_params)
     if @list.save
-      render json: @list.as_json(only: [:name, :permissions])
+      render json: @list.as_json(only: [:id, :name, :permissions])
     else
       render json: @list.errors.full_messages
+    end
+  end
+
+  def destroy
+    @list = List.find(params[:id])
+    if @current_user.can?(:destroy, @list)
+      @list.destroy
+      render json: {message: "List was destroyed."}
+    else
+      render json: {error: "Problem destroying list."}
     end
   end
 
