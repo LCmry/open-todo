@@ -15,6 +15,14 @@ class Api::UsersController < Api::BaseController
     end
   end
 
+  def destroy
+    if @current_user.destroy
+      render json: {message: "User destroyed."}
+    else
+      render json: {error: "Problem destroying user."}
+    end
+  end
+
   private
 
   def user_params
