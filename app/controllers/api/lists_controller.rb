@@ -1,5 +1,6 @@
 class Api::ListsController < Api::BaseController
   before_filter :restrict_access, except: [:index]
+  wrap_parameters format: :json
 
   def index
     if restrict_access_by_header
@@ -11,7 +12,9 @@ class Api::ListsController < Api::BaseController
   end
 
   def create
-    @list = List.new(list_params)
+    lp = list_params
+    lp[:user_id] = @current_user.id
+    @list = List.new(lp)
     if @list.save
       render json: @list.as_json(only: [:id, :name, :permissions])
     else
@@ -32,6 +35,6 @@ class Api::ListsController < Api::BaseController
   private
 
   def list_params
-    params.require(:list).permit(:name, :permissions).permit(:user_id, @current_user.id)
+    params.require(:list).permit(:name, :permissions, :user_id)
   end
 end
