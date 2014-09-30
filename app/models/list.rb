@@ -2,7 +2,10 @@ class List < ActiveRecord::Base
   belongs_to :user
   has_many :items, dependent: :destroy
 
+  validates :name, presence: true
   validates_uniqueness_of :name, scope: :user_id
+  validates :permissions, presence: true
+  validates :user_id, presence: true
 
   def self.permission_options
     %w(private viewable open)
