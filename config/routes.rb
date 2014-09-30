@@ -12,7 +12,7 @@ Todo::Application.routes.draw do
   root to: 'users#new'
 
   namespace :api, defaults: {format: 'json'} do
-    resources :users, only: [:index, :create]
+    resources :users, only: [:index, :create, :destroy]
     resources :lists, only: [:index, :create, :destroy]
   end
 end

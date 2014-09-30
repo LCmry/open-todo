@@ -16,7 +16,9 @@ class Api::UsersController < Api::BaseController
   end
 
   def destroy
-    if @current_user.destroy
+    @user = User.find(params[:id])
+    if @user == @current_user
+      @current_user.destroy
       render json: {message: "User destroyed."}
     else
       render json: {error: "Problem destroying user."}
