@@ -21,7 +21,7 @@ You will also need your user id should you wish to delete your account.
 2. To delete a user
 ```
 curl -X DELETE -H 'Authorization:Token token="yourreallylongtokenreceivedonsignup"'
--H "Content-type:application/json" http://localhost:3000/api/users/id
+http://localhost:3000/api/users/id
 ```
 #### Lists
 1. To make a list
