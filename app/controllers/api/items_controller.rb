@@ -18,9 +18,9 @@ class Api::ItemsController < Api::BaseController
   def destroy
     @item = Item.find(params[:id])
     if @current_user.can?(:destroy, @list) && @item.mark_complete
-      render json: {message: "Item destroyed."}
+      render json: {message: "Item completed."}
     else
-      render json: {error: "Can't destroy item."}
+      render json: {error: "Problem completing item."}
     end
   end
 
