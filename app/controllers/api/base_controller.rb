@@ -8,11 +8,11 @@ class Api::BaseController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   
+  private
+  
   def record_not_found
     render json: {error: "It's not there."}, status: 404
   end
-
-  private
 
   def restrict_access
     unless restrict_access_by_header

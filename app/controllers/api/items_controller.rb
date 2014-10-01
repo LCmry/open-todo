@@ -3,24 +3,24 @@ class Api::ItemsController < Api::BaseController
   wrap_parameters format: :json
 
   def create
-    @item = Item.new(item_params)
     @list = List.find(params[:list_id])
     if @current_user.can?(:create, @list)
-      @item.save
-      render json: @list.items.as_json(only: [:description, :completed])
+      if @list.add(item_params[:description])
+        render json: @list.items.as_json(only: [:description, :completed])
+      else
+        render json: @item.errors.full_messages
+      end
     else
-      render json: @item.errors.full_messages
+      render json: {error: "Error creating item."}
     end
   end
 
   def destroy
     @item = Item.find(params[:id])
-    @list = List.find(params[:list_id])
-    if @current_user.can?(:destroy, @list)
-      @item.destroy
+    if @current_user.can?(:destroy, @list) && @item.mark_complete
       render json: {message: "Item destroyed."}
     else
-      render json: {error: "Cannot destroy item."}
+      render json: {error: "Can't destroy item."}
     end
   end
 

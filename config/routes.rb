@@ -14,7 +14,7 @@ Todo::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     resources :users, only: [:index, :create, :destroy]
     resources :lists, only: [:index, :show, :create, :destroy, :update] do
-      resources :items, only: [:create]
+      resources :items, only: [:create, :destroy]
     end
   end
 end

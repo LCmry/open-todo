@@ -3,6 +3,7 @@ class Item < ActiveRecord::Base
   delegate :user, to: :list
 
   validates :description, presence: true
+  validates :list_id, presence: true
 
   scope :completed, -> { where(completed: false) }
 
