@@ -2,11 +2,6 @@ class Api::UsersController < Api::BaseController
   before_filter :restrict_access, except: [:create]
   wrap_parameters format: :json
   
-  def index
-    @users = User.all
-    render json: @users
-  end
-
   def create
     @user = User.new(user_params)
     if @user.save
