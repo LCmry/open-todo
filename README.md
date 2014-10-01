@@ -28,7 +28,8 @@ http://localhost:3000/api/users/id
 To make a list
 ```
 curl -X POST -H 'Authorization:Token token="yourreallylongtokenreceivedonsignup"'
--H "Content-type:application/json" -d "{\"name\": \"listname\", \"permissions\": \"permission\"}" http://localhost:3000/api/lists
+-H "Content-type:application/json" -d "{\"name\": \"listname\", \"permissions\":
+\"permission\"}" http://localhost:3000/api/lists
 ```
 Permissions options:
  "open" - These lists can be viewed and modified by any user.
@@ -77,5 +78,5 @@ http://localhost:3000/api/lists/list_id/items
 To mark an item as completed
 ```
 curl -X DELETE -H 'Authorization:Token token="yourreallylongtokenreceivedonsignup"'
-http://localhost:3000/api/list_id/items/item_id
+http://localhost:3000/api/lists/list_id/items/item_id
 ```
