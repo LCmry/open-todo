@@ -1,3 +1,5 @@
+# Using token authentication, not tested by this spec
+
 require 'spec_helper'
 
 describe Api::UsersController do

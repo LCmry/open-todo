@@ -30,4 +30,4 @@ class Api::BaseController < ActionController::Base
     end
   end
 end
-# Above methods and api process from https://www.amberbit.com/blog/2014/2/19/building-and-documenting-api-in-rails/
+# Some above methods and api process from https://www.amberbit.com/blog/2014/2/19/building-and-documenting-api-in-rails/
