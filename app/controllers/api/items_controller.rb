@@ -6,7 +6,7 @@ class Api::ItemsController < Api::BaseController
     @list = List.find(params[:list_id])
     if @current_user.can?(:create, @list)
       if @list.add(item_params[:description])
-        render json: @list.items.as_json(only: [:description, :completed])
+        render json: @list.items.as_json(only: [:id, :description, :completed])
       else
         render json: @item.errors.full_messages
       end
@@ -17,6 +17,7 @@ class Api::ItemsController < Api::BaseController
 
   def destroy
     @item = Item.find(params[:id])
+    @list = List.find(params[:list_id])
     if @current_user.can?(:destroy, @list) && @item.mark_complete
       render json: {message: "Item completed."}
     else

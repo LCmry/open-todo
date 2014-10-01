@@ -14,7 +14,7 @@ class Api::ListsController < Api::BaseController
   def show
     @list = List.find(params[:id])
     if @current_user.can?(:view, @list)
-      render json: @list.items.as_json(only: :description)
+      render json: @list.items.as_json(only: [:id, :description])
     else
       render json: {error: "Cannot view list."}
     end

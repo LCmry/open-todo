@@ -47,9 +47,14 @@ curl -X DELETE -H 'Authorization:Token token="yourreallylongtokenreceivedonsignu
 http://localhost:3000/api/lists/id
 ```
 4. To view the list index
+ To view your lists:
 ```
 curl -H 'Authorization:Token token="yourreallylongtokenreceivedonsignup"'
 http://localhost:3000/api/lists
+```
+To view other open and visible lists:
+```
+curl http://localhost:3000/api/lists
 ```
 5. To view a list
 ```
